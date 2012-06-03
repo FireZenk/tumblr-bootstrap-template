@@ -52,7 +52,12 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      	<a class="brand" href="/">{Title}</a>
+      	<a class="brand" href="/"><strong>{Title}</strong></a>
+
+      	<ul class="nav">
+		  <li><a href="/archive">Archive</a></li>
+		  <li><a href="/rss">RSS</a></li>
+		</ul>
 
       	<form class="navbar-search pull-right" action="/search" method="get">
   			<input type="text" class="search-query" placeholder="Search" name="q" value="{SearchQuery}">
@@ -68,7 +73,7 @@
 	  		<div class="well">
 		  		<ul class="nav nav-list">
 					<li class="nav-header">
-						Links
+						Navigation
 					</li>
 					<li class="active">
 					    <a href="/">
@@ -78,10 +83,26 @@
 					</li>
 					<li>
 						<a href="/ask">
-						<i class="icon-comment"></i>
-						{AskLabel}
+							<i class="icon-comment"></i>
+							{AskLabel}
 						</a>
 					</li>
+					<li>
+						<a href="/submit">
+							<i class="icon-inbox"></i>
+							{SubmitLabel}
+						</a>
+					</li>
+					{block:HasPages}
+            			{block:Pages}
+					<li>
+						<a href="{URL}">
+							<i class="icon-file"></i>
+							{Label}
+						</a>
+					</li>
+						{/block:Pages}
+            		{/block:HasPages}
 					<li>
 					  	<a href="/archive">
 					  		<i class="icon-book"></i>
@@ -104,20 +125,25 @@
 			       	  	Twitter
 			       	</li>
 			       	  	{block:Twitter}
-						    <div id="twitter" style="display:none;"><!-- Replace your twitter url {TwitterUsername} -->
-						        <a href="http://twitter.com/FireZenk"></a>
+						    <div id="twitter" style="display:none;">
+						        <a href="http://twitter.com/{TwitterUsername}/"></a>
 						        <div id="tweets"></div>
 						    </div>
 
 						    <script type="text/javascript">
 						        function recent_tweets(data) {
 						            for (i=0; i<data.length; i++) {
+						            	if(data[i].text.charAt(0)=="@") {
+						            		//do nothing
+						            	} else {
+
 						                document.getElementById("tweets").innerHTML =
 						                    document.getElementById("tweets").innerHTML +
 						                    '<a href="http://twitter.com/{TwitterUsername}/status/' +
 						                    (data[i].id_str ? data[i].id_str : data[i].id) +
 						                    '"><div class="content">' + data[i].text +
 						                    '</div></a>';
+						                }
 						            }
 						            document.getElementById("twitter").style.display = 'block';
 						        }

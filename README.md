@@ -11,6 +11,9 @@ Features:
 	-Responsive design
 	-Finder enabled
 	-Full background customizable
+	-Custom pages support
+	-Submit page support
+	-Ask page support
 
 Demo:
 
