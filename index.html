@@ -8,14 +8,15 @@
 	<title>{block:SearchPage}{lang:Search results for SearchQuery} - {/block:SearchPage}{Title}</title>
 	<link rel="shortcut icon" href="{Favicon}" />
     <link rel="alternate" type="application/rss+xml" href="{RSS}" />
+    <link rel="shortcut icon" href="{Favicon}" />
     
-    <meta name="image:Background" content="http://twitter.com/images/themes/theme1/bg.png">
+    <meta name="image:Background" content="http://static.tumblr.com/ezvbni6/A5Lm527if/bgtwit.png">
     <meta name="color:Content Background" content="#c0deed"/>
     <meta name="text:Disqus Shortname" content="" />
     <meta name="if:Enable endless scrolling" content="1">
     
     <!-- Le styles -->
-    <link href="http://firezenk.com/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="http://static.tumblr.com/ezvbni6/Fikm528dg/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -38,14 +39,15 @@
 	  	text-transform:capitalize;
 	  }
     </style>
-    <link href="http://firezenk.com/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="http://firezenk.com/bootstrap/css/docs.css" rel="stylesheet">
-    <link href="http://firezenk.com/bootstrap/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://static.tumblr.com/ezvbni6/p9dm527jh/bootstrap-responsive.min.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <style type="text/css">{CustomCSS}</style>
+
 </head>           
 <body>
 
@@ -81,18 +83,22 @@
 					    	Home
 					    </a>
 					</li>
+					{block:AskEnabled}
 					<li>
 						<a href="/ask">
 							<i class="icon-comment"></i>
 							{AskLabel}
 						</a>
 					</li>
+					{/block:AskEnabled}
+					{block:SubmissionsEnabled}
 					<li>
 						<a href="/submit">
 							<i class="icon-inbox"></i>
 							{SubmitLabel}
 						</a>
 					</li>
+					{/block:SubmissionsEnabled}
 					{block:HasPages}
             			{block:Pages}
 					<li>
@@ -110,7 +116,7 @@
 					  	</a>
 					</li>
 					<li>
-					    <a href="/rss">
+					    <a href="{RSS}">
 					    	<i class="icon-fire"></i>
 					    	RSS
 					    </a>
@@ -198,11 +204,17 @@
 	                	</div>
 	                	<div class="well">
 		                    <li class="post photo">
-		                        <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+		                        {LinkOpenTag}
+							        <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+							    {LinkCloseTag}
 
-		                        {block:Caption}
-		                            <div class="caption">{Caption}</div>
-		                        {/block:Caption}
+							    {block:HighRes}
+							        <br/><a href="{PhotoURL-HighRes}">View in High-Res</a>
+							    {/block:HighRes}
+
+							    {block:Caption}
+							        {Caption}
+							    {/block:Caption}
 
 		                        {PostNotes}
 		                    </li>
